@@ -1,0 +1,34 @@
+{
+    "name": "Sawh/HtmlBuster",
+    "description": "HTML Buster works in conjunction with Grunt's hashmap to read it's output files in order to dynamically load generated versioned asset files.",
+    "license" : "BSD-3-Clause-Attribution",
+    "authors" : [
+        {
+            "name": "Ashwin Sawh",
+            "email": "ashsawh@gmail.com",
+            "homepage": "http://www.ashsawh.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.9",
+        "laravelcollective/html": "5.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8 || ^5.0"
+    },
+    "autoload": {
+        "classmap": [
+            "src"
+        ],
+        "psr-4": {
+            "Sawh\\HtmlBuster\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.3-dev"
+        }
+    }
+}
+
+
