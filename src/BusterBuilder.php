@@ -1,3 +1,4 @@
+
 <?php
 
 namespace Sawh\HtmlBuster;
@@ -89,8 +90,13 @@ class BusterBuilder extends HtmlBuilder {
      */
     protected function getConfigVar($var)
     {
-        $result = Config::get("app.{$var}");
-        return $result ? $result : self::strtoupper($var);
-    }
+        try {
+            $result = Config::get("app.{$var}");
+        } catch(\Exception $exception) {
+            $var = strtoupper($var);
+            $result = constant("self::$var");
+        }
 
+        return $result;
+    }
 }
