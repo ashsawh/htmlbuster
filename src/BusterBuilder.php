@@ -34,11 +34,24 @@ class BusterBuilder extends HtmlBuilder {
         return parent::script($this->getHashedUrl($url), $attributes, $secure);
     }
 
+    /**
+     * Set the file pathway separator that was established through grunt's hashmap. The default is '-'
+     * @param string $separator
+     * @return Sawh\HtmlBuster\BusterBuilder
+     */
     public function setFileSeparator($separator)
     {
         $this->separator = $separator;
+        return $this;
     }
 
+    /**
+     * Function takes the url input gets all listed information about it's path, from there the hashfile is then read
+     * from config defaults and output being the most current version for the asset.
+     *
+     * @param string $url
+     * @return string
+     */
     protected function getHashedUrl($url)
     {
         try
@@ -58,11 +71,22 @@ class BusterBuilder extends HtmlBuilder {
         return $this->getConfigVar('assets_version_path') . $info['filename'] . $this->separator . $hash .'.'. $info['extension'];
     }
 
+    /**
+     * Uses the listed configured pathway for the hash file, which is expected to be JSON.
+     * @return array Decoded JSON data
+     */
     protected function getJsonFile()
     {
         return json_decode(File::get(public_path($this->getConfigVar('version_path'))), true);
     }
 
+    /**
+     * Checks and retrieves specified variable from app configuration. If one does not exist established class
+     * constants are used.
+     *
+     * @param string $var
+     * @return string
+     */
     protected function getConfigVar($var)
     {
         $result = Config::get("app.{$var}");
